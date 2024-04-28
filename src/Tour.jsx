@@ -1,16 +1,20 @@
 import React from 'react'
 
 const Tour = (props) => {
-  const {name,info,price,image,key} =props;
+  const {name,info,price,image,id,removeTour} =props;
   
   return (
-    <div key={key} >
-        <p>{price}</p>
-        <img src={image} alt={name}/>
-        <h2>{name}</h2>
+    <article className="single-tour">
+      <img src={image} alt={name} className="img" />
+      <span className="tour-price">{price}</span>
+      <div className="tour-info">
+        <h5>{name}</h5>
         <p>{info}</p>
-        <button type='button' className='btn' onClick={()=>{}}>Not Interested</button>
-    </div>
+      </div>
+      <button type="button" className="btn btn-block delete-btn" onClick={() => removeTour(id)}>
+        Not Interested
+      </button>
+    </article>
   )
 }
 
