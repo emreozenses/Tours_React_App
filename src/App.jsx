@@ -12,19 +12,18 @@ const App = () => {
     const newTours = tours.filter((tour)=>tour.id!==id);
     setTours(newTours);
   }
-  useEffect(()=>{
-    const getTours =async ()=>{
-      setIsLoading(true)
-      try {
-        const resp = await fetch(url);
-        const data = await resp.json();
-        setTours(data);
-
-      } catch (error) {
-        console.log(error);
+      const getTours = async () => {
+        setIsLoading(true)
+        try {
+          const resp = await fetch(url)
+          const data = await resp.json()
+          setTours(data)
+        } catch (error) {
+          console.log(error)
+        }
+        setIsLoading(false)
       }
-      setIsLoading(false)
-    };
+  useEffect(()=>{
     getTours();
   },[]);
 
@@ -32,6 +31,16 @@ const App = () => {
     return(
       <main>
         <Loading/>
+      </main>
+    )
+  }
+  if(tours.length === 0){
+    return(
+      <main>
+        <div className="title">
+          <h2>no tours left</h2>
+          <button type="button" className="btn" style={{marginTop:'2rem'}} onClick={()=>getTours()}>Refresh</button>
+        </div>
       </main>
     )
   }
